@@ -1,0 +1,53 @@
+<div class="col-md-6 form-group">
+    <div >
+        <table class="table" >
+            <thead>
+                <tr scope="row">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+               
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users" scope="row" >
+                  <td>{{user.id}}</td>
+                  <td> {{user.name}}</td>
+                  <td> {{user.age}}</td>
+                  <td>{{user.email}}</td> 
+                  <td><a (click)="editUser(user)"> <span class="glyphicon glyphicon-edit"></span></a></td> 
+                  <td> <a (click)="deleteUser(user.id)"><span class="glyphicon glyphicon-trash"></span></a></td></tr>
+            </tbody> 
+        </table>
+      </div>
+</div>
+
+<div *ngIf="edit" class="col-md-6 form-group">
+    <form (ngSubmit)="onEditUser(f)" #f=ngForm >
+        <div class="form-group">
+            ID<br>
+            <input type="number"   class="form-control" name="id" [(ngModel)]="user.id" ngModel required>
+        </div>
+      
+        <div class="form-group">
+            Name:<br>
+            <input type="text"  class="form-control"  name="name"  [(ngModel)]="user.name" ngModel required >
+            <br>
+        </div>
+         <div class="form-group">
+             Age:<br>
+            <input type="number"  class="form-control"  name="age" [(ngModel)]="user.age" ngModel required>
+           <br>
+          </div>
+           <div class="form-group">
+              Email:<br>
+              <input type="email"  class="form-control"  name="email"  [(ngModel)]="user.email" ngModel required email>
+              <br>         
+        </div>
+    
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+    </form> 
+</div>
